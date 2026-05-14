@@ -1,7 +1,7 @@
 {
   "name": "html-output",
-  "version": "0.2.0",
-  "description": "Route Claude Code answers into self-contained HTML artifacts (status reports, PR writeups, design systems, slide decks, flowcharts, research explainers, animation prototypes, custom editor UIs, exploration boards) instead of markdown walls. Writes to ./artifacts/<slug>-<ts>.html and opens in the browser.",
+  "version": "0.3.0",
+  "description": "Route Claude Code answers into self-contained HTML artifacts (status reports, PR writeups, design systems, slide decks, flowcharts, research explainers, animation prototypes, custom editor UIs, exploration boards) instead of markdown walls. Writes to ./artifacts/<slug>-<ts>.html and opens in the browser. Every skill ships a clipboard-relay pattern: action buttons in the artefact copy a Claude-ready follow-up prompt to the clipboard so clicks feed the next turn.",
   "author": {
     "name": "thariqs",
     "url": "https://thariqs.github.io/html-effectiveness/"

@@ -48,6 +48,27 @@ per slide.
   `Esc` for overview grid (optional, nice).
 - **Progress indicator**: subtle bar or `n / N` at the bottom corner.
 
+## Clipboard relay — making the artefact actionable
+
+Use the shared pattern (see `../_shared/clipboard-relay.md`) to let the
+audience expand any slide into a full page.
+
+For html-deck:
+- **Where buttons go**: a single subtle button in a corner of each
+  content slide ("Expand this slide →"). Optional: the same buttons
+  on the `Esc` overview grid.
+- **`data-action`**: `Expand slide <N> "<title>" into a full page`.
+- **`data-payload`**: the slide's headline plus a one-line summary of
+  its supporting points.
+- **`data-followup`**: `Use the html-research style.` (article) or
+  `Use the html-illustration style.` (diagram-heavy slide).
+- **Primary highlight**: never — every slide is equal-weight inside
+  the deck.
+
+Title slides and section dividers usually don't need expand buttons.
+The relay must never compete with the slide's body message — put it
+in a corner, mono, low-contrast.
+
 ## Anti-patterns
 
 - Do not put paragraphs on slides. If you have a paragraph, it's a

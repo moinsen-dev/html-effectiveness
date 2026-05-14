@@ -54,6 +54,23 @@ outside).
 - **References / further reading**: numbered list at the bottom, real
   URLs only if the user asked for citations.
 
+## Clipboard relay — making the artefact actionable
+
+Use the shared pattern (see `../_shared/clipboard-relay.md`) to let
+the reader expand any sub-topic on demand.
+
+For html-research:
+- **Where buttons go**: end of each body section ("Go deeper"
+  affordance); optional duplicates on each TOC entry.
+- **`data-action`**: `Go deeper on "<concept>" from the research`.
+- **`data-payload`**: the section's one-line claim.
+- **`data-followup`**: `Show one concrete example with code.` for
+  technical sections; `Walk me through a worked example.` otherwise.
+- **Primary highlight**: rare — only if one section is explicitly
+  flagged as "start here."
+
+Hero summary, callouts and references are not action points.
+
 ## Anti-patterns
 
 - Do not flatten into a single wall of paragraphs. Use the section

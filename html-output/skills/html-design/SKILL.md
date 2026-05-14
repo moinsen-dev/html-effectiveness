@@ -57,6 +57,25 @@ brand* — in that case adopt their tokens but keep the layout discipline.
 - **Composition examples**: 1-2 small layouts showing the component in
   context.
 
+## Clipboard relay — making the artefact actionable
+
+Use the shared pattern (see `../_shared/clipboard-relay.md`) to let the
+reader pick a variant and continue with implementation.
+
+For html-design:
+- **Where buttons go**: end of each variant card (variants flavour)
+  or end of each primitive section (system flavour).
+- **`data-action`**: `Implement variant "<name>" from the design system`
+  or `Implement the <primitive> primitive from the design system`.
+- **`data-payload`**: the variant's props/state line or the primitive's
+  one-line role.
+- **`data-followup`**: `Write the component code.` or
+  `Generate the JSX + CSS implementation.`
+- **Primary highlight**: rare — most design systems have many valid
+  variants. Highlight only if the user explicitly named a default.
+
+Color swatches, type ramps and spacing scales are informational.
+
 ## Anti-patterns
 
 - Do not embed Figma screenshots or external images. Render the components

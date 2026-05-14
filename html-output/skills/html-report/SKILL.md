@@ -53,6 +53,23 @@ clay for the primary accent (titles, key numbers).
 - **Footer**: who wrote it (the user or "Claude Code"), one-line link back
   to the source (PR list, dashboard URL).
 
+## Clipboard relay — making the artefact actionable
+
+Use the shared pattern (see `../_shared/clipboard-relay.md`) to make
+report items drill-downable.
+
+For html-report:
+- **Where buttons go**: per item in "Risks" and per entry in
+  "Next actions" / "In flight". Skip "What shipped" — those are
+  statements. Skip metric tiles.
+- **`data-action`**: `Drill into "<section title>" from the report`
+  (drill-down) or `Address risk "<title>" from the report` (risks).
+- **`data-payload`**: the one-line description from the report itself.
+- **`data-followup`**: `Show me the next-level detail.` for drill-downs,
+  `Write a mitigation plan.` for risks.
+- **Primary highlight**: optional `.primary` on the single most pressing
+  next-action or top risk.
+
 ## Anti-patterns
 
 - No long markdown-style bullet lists. Use cards, tiles, two-column rows.

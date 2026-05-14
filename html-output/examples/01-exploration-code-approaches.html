@@ -103,6 +103,26 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+      position: relative;
+    }
+
+    .approach.picked {
+      border-color: var(--clay);
+    }
+
+    .approach.picked::after {
+      content: 'Recommended';
+      position: absolute;
+      top: -10px;
+      right: 20px;
+      background: var(--clay);
+      color: var(--white);
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 8px;
     }
 
     .approach-head h2 {
@@ -251,6 +271,81 @@
       padding: 1px 6px;
       border-radius: 4px;
     }
+
+    /* ---------- pick button (clipboard relay → Claude Code) ---------- */
+
+    .pick-btn {
+      margin-top: 4px;
+      background: var(--white);
+      border: 1.5px solid var(--gray-300);
+      color: var(--slate);
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      padding: 11px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+      width: 100%;
+    }
+    .pick-btn:hover {
+      border-color: var(--clay);
+      color: var(--clay);
+      background: var(--gray-150);
+    }
+    .pick-btn:active { transform: translateY(1px); }
+
+    .approach.picked .pick-btn {
+      background: var(--clay);
+      border-color: var(--clay);
+      color: var(--white);
+    }
+    .approach.picked .pick-btn:hover {
+      background: var(--clay);
+      filter: brightness(0.92);
+      color: var(--white);
+    }
+    .pick-btn .arrow { display: inline-block; transition: transform 0.15s ease; }
+    .pick-btn:hover .arrow { transform: translateX(3px); }
+
+    /* ---------- toast (clipboard feedback) ---------- */
+
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      background: var(--slate);
+      color: var(--ivory);
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 12px 18px;
+      border-radius: 10px;
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none;
+      max-width: 520px;
+      text-align: center;
+      z-index: 100;
+      box-shadow: 0 4px 16px rgba(20, 20, 19, 0.15);
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .toast .kbd {
+      font-family: var(--mono);
+      background: rgba(255,255,255,0.12);
+      padding: 1px 6px;
+      border-radius: 4px;
+      margin: 0 2px;
+    }
   </style>
 </head>
 <body>
@@ -322,10 +417,17 @@
           <span class="chip">Reuse: <strong>low</strong></span>
           <span class="chip">SSR safe: <strong>yes</strong></span>
         </div>
+        <button class="pick-btn" type="button"
+          data-action="Continue with approach 01 from the exploration"
+          data-payload="Inline useEffect + setTimeout — debounce lives directly in the component owning the input"
+          data-followup="Now write the implementation plan for it.">
+          <span>Continue with approach 01</span>
+          <span class="arrow">→</span>
+        </button>
       </article>
 
       <!-- ---------- Approach 2 ---------- -->
-      <article class="approach">
+      <article class="approach picked">
         <header class="approach-head">
           <h2><span class="num">02</span>Custom useDebounce hook</h2>
           <p>Extract the timer into a shared hook under <code style="font-family:var(--mono)">src/hooks/</code>.</p>
@@ -371,6 +473,13 @@
           <span class="chip">Reuse: <strong>high</strong></span>
           <span class="chip">SSR safe: <strong>yes</strong></span>
         </div>
+        <button class="pick-btn" type="button"
+          data-action="Continue with approach 02 from the exploration"
+          data-payload="Custom useDebounce hook — extract the timer into a shared src/hooks/ module reused across the codebase"
+          data-followup="Now write the implementation plan for it.">
+          <span>Continue with approach 02</span>
+          <span class="arrow">→</span>
+        </button>
       </article>
 
       <!-- ---------- Approach 3 ---------- -->
@@ -427,6 +536,13 @@
           <span class="chip">Reuse: <strong>high</strong></span>
           <span class="chip">SSR safe: <strong>yes</strong></span>
         </div>
+        <button class="pick-btn" type="button"
+          data-action="Continue with approach 03 from the exploration"
+          data-payload="Adopt the use-debounce library — leading/trailing/maxWait semantics ready, ~1.4 kb gz dependency"
+          data-followup="Now write the implementation plan for it.">
+          <span>Continue with approach 03</span>
+          <span class="arrow">→</span>
+        </button>
       </article>
 
     </section>
@@ -449,5 +565,69 @@
     </aside>
 
   </div>
+
+  <script>
+    /* Clipboard relay — each "Continue with approach NN" button writes a
+       Claude-ready follow-up prompt to the clipboard. The user pastes it
+       into Claude Code and execution continues with that branch. */
+    (function () {
+      function buildPrompt(action, payload, followup) {
+        var base = action + (payload ? ': "' + payload + '".' : '.');
+        return followup ? base + ' ' + followup : base;
+      }
+
+      function writeToClipboard(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text);
+        }
+        return new Promise(function (resolve, reject) {
+          try {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            ta.remove();
+            resolve();
+          } catch (err) { reject(err); }
+        });
+      }
+
+      var toastEl = null, toastTimer = null;
+      function showToast(html) {
+        if (!toastEl) {
+          toastEl = document.createElement('div');
+          toastEl.className = 'toast';
+          toastEl.setAttribute('role', 'status');
+          toastEl.setAttribute('aria-live', 'polite');
+          document.body.appendChild(toastEl);
+        }
+        toastEl.innerHTML = html;
+        requestAnimationFrame(function () { toastEl.classList.add('show'); });
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 3200);
+      }
+
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.pick-btn');
+        if (!btn) return;
+        e.preventDefault();
+        var action = btn.dataset.action || 'Continue';
+        var payload = btn.dataset.payload || '';
+        var followup = btn.dataset.followup || '';
+        writeToClipboard(buildPrompt(action, payload, followup)).then(
+          function () {
+            showToast('Copied prompt. Paste into Claude Code <span class="kbd">⌘V</span> <span class="kbd">↵</span> to continue.');
+          },
+          function () {
+            showToast('Clipboard blocked — open browser console and copy the prompt manually.');
+          }
+        );
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -47,6 +47,27 @@ Stroke width 1.5-2px. Arrows: small triangle marker, never giant.
 - **Side annotations**: short numbered notes calling out specific edges
   or boxes. Connect by number, not by arrows-on-arrows.
 
+## Clipboard relay — making the artefact actionable
+
+Use the shared pattern (see `../_shared/clipboard-relay.md`) sparingly —
+most illustrations are informational, not action points.
+
+For html-illustration:
+- **Where buttons go**: only on labeled nodes the reader might
+  reasonably want to drill into (a module box, a numbered step, a
+  decision diamond with meaningful branches). Skip legends, arrowheads
+  and vocabulary shapes.
+- **`data-action`**: `Explain "<node>" from the diagram in depth`.
+- **`data-payload`**: the node's label plus a context word if the
+  label alone is ambiguous.
+- **`data-followup`**: `Show the code that implements it.` or
+  `Walk me through what happens when this path executes.`
+- **Primary highlight**: rare — only if the diagram has an explicit
+  entry point or "primary path."
+
+If you'd be hard-pressed to write a sensible payload for a node, it
+doesn't need a button. Many illustrations should have zero buttons.
+
 ## Anti-patterns
 
 - Do not use Mermaid, PlantUML, Graphviz, or any rendering library. Hand-

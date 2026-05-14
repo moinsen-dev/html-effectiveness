@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Make Claude Code answer with rich, opinionated HTML artifacts instead of walls of markdown. Companion marketplace to the 'unreasonable effectiveness of HTML' demos.",
-    "version": "0.2.0"
+    "version": "0.3.0"
   },
   "plugins": [
     {
       "name": "html-output",
       "source": "./html-output",
-      "description": "Nine skills + one /html command + a UserPromptSubmit hook that auto-routes status reports, PR writeups, design systems, slide decks, flowcharts, research explainers, prototypes, and custom editor UIs into self-contained .html files in ./artifacts/ — then opens them in the browser. Style templates are the 20 demo HTMLs at the root of this repo.",
-      "version": "0.2.0",
+      "description": "Nine skills + one /html command + a UserPromptSubmit hook that auto-routes status reports, PR writeups, design systems, slide decks, flowcharts, research explainers, prototypes, and custom editor UIs into self-contained .html files in ./artifacts/ — then opens them in the browser. As of 0.3.0 every skill ships a clipboard-relay pattern so the artefact's action buttons feed Claude Code's next prompt.",
+      "version": "0.3.0",
       "category": "productivity"
     }
   ]

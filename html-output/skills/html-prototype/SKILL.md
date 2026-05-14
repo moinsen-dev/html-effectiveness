@@ -54,6 +54,28 @@ saturation than reports — the artifact's purpose is to be looked at.
 - **Notes lane** (optional): for each step, a short caption explaining
   what the screen is meant to demonstrate.
 
+## Clipboard relay — making the artefact actionable
+
+Use the shared pattern (see `../_shared/clipboard-relay.md`) to let the
+reader lock in a configuration and continue with production code.
+
+For html-prototype:
+- **Where buttons go (animation sandbox)**: alongside the spec readout —
+  "Adopt this configuration." Optional: one button per preset row.
+- **Where buttons go (clickable flow)**: one per step plus a single
+  "Use this whole flow" at the end.
+- **`data-action`**: `Adopt the "<config>" configuration from the prototype`
+  (animation) or `Implement step <N> "<screen>" from the prototype`
+  (flow).
+- **`data-payload`**: the current CSS values (animation) or the step's
+  one-line goal (flow).
+- **`data-followup`**: `Write production-ready CSS/JSX.`
+- **Primary highlight**: `class="primary"` on the user's last-tuned
+  state's adopt button.
+
+Sliders, prev/next and the stage preview are core interactions — the
+relay button sits *alongside* them, never on top.
+
 ## Anti-patterns
 
 - No animation libraries (GSAP, Framer Motion). Vanilla CSS + a few lines

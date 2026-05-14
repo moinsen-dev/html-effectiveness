@@ -128,7 +128,7 @@ RULES = [
         r"\blet me edit .{1,40}\s+visually\b",
     ]),
     ("html-exploration", [
-        r"\bthree (?:approaches|options|ways)\b",
+        r"\b(?:two|three|four|five|six|seven|eight|nine|ten|\d{1,2})\s+(?:approaches|options|ways|directions|alternatives)\b",
         r"\bcompare approaches\b",
         r"\bvisual directions\b",
         r"\bimplementation plan\b",
@@ -136,7 +136,7 @@ RULES = [
         r"\bweigh (?:up )?the trade[- ]?offs of\b",
         r"\bapproach [A-D] vs[. ]+approach [A-D]\b",
         r"\bbefore we pick a direction\b",
-        r"\bN ways to\b",
+        r"\b(?:two|three|four|five|six|seven|eight|nine|ten|\d{1,2})\s+ways\s+to\b",
         r"\bwhat would (?:it|that) look like\b",
     ]),
 ]

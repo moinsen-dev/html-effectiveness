@@ -58,6 +58,34 @@ recommended option marked with a small clay ribbon — never a giant
   cells = short verdict ("✓ fastest", "needs migration").
 - **Recommendation**: one paragraph at the bottom; pick one, say why,
   acknowledge what you give up.
+- **Clipboard-relay button on every option card** (see below).
+
+## Clipboard relay — making the artefact actionable
+
+Exploration was the project's **first step-2 skill**: clicking a card
+feeds Claude Code's next prompt instead of just looking pretty.
+
+Every option card MUST end with a `<button class="pick-btn">` that
+writes a continuation prompt to the user's clipboard on click.
+
+For html-exploration:
+- **Where buttons go**: end of each option card, after the chips row.
+- **`data-action`**: `Continue with approach NN from the exploration`
+  (e.g. `"Continue with approach 02 from the exploration"`).
+- **`data-payload`**: the option's name plus a one-line description.
+- **`data-followup`**: `Now write the implementation plan for it.`
+- **Primary highlight**: the recommended card gets `class="picked"`
+  on its `<article>` — its `::after` badge then reads "Recommended"
+  (the word "Pick" now belongs to the button), and its `.pick-btn`
+  gets a clay fill via the shared CSS.
+
+For the CSS, JS body and prompt-assembly logic, see
+`../_shared/clipboard-relay.md`. Convergence-mode artefacts
+(implementation plans) do not need the relay — they're already the
+*consequence* of a pick.
+
+The reference implementation is
+`../../examples/01-exploration-code-approaches.html`.
 
 ## What to include (converge / plan)
 

@@ -61,6 +61,27 @@ Use `../_shared/style-tokens.md`. Code review needs:
 - For each module: one-line role, 2-3 key files, entry-point function.
 - Optional "data flow" strip showing request → handler → store → response.
 
+## Clipboard relay — making the artefact actionable
+
+Use the shared pattern (see `../_shared/clipboard-relay.md`) to let the
+reader act on findings and modules without re-reading the artefact.
+
+For html-code-review:
+- **Where buttons go (review-mode)**: one per comment with severity
+  ≥ "suggestion". Skip nits.
+- **Where buttons go (map-mode)**: one per module box or hot-path
+  callout.
+- **`data-action`**: `Apply review finding "<title>"` (review) or
+  `Drill into module "<name>"` (map).
+- **`data-payload`**: the comment's one-line summary or the module's
+  one-line role.
+- **`data-followup`**: `Write the actual diff.` (review) or
+  `Show me its entry points and call graph.` (map).
+- **Primary highlight**: any "blocker" severity finding gets
+  `class="primary"`.
+
+Summary panel verdicts and the file-tree are informational.
+
 ## Anti-patterns
 
 - Do not paste 500-line diffs verbatim. Show the meaningful hunks; collapse

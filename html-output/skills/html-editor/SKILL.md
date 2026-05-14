@@ -61,11 +61,40 @@ actions only; olive for "saved / live"; rust for "error / blocked".
 - **Export**: button that dumps current state as JSON (or CSV) for
   copy-paste back into the source of truth.
 
+## Clipboard relay — making the artefact actionable
+
+The clipboard-relay pattern (see `../_shared/clipboard-relay.md`) is
+how editor state hands off to the codebase. The editor is a step-2
+surface by definition — every change the user makes is meant to go
+somewhere real.
+
+For html-editor:
+- **Where buttons go**: in the header strip alongside Export-JSON — a
+  single `Apply state to the codebase` button. No per-row buttons; the
+  whole editor state is one decision.
+- **`data-action`**: `Apply this editor state to the codebase`.
+- **`data-payload`**: a compact serialisation of the *live* editor
+  state, built at click time (not at HTML generation). Override the
+  inline script for this skill: replace
+  `var payload = btn.dataset.payload || '';` with
+  `var payload = JSON.stringify(getCurrentState());`
+  where `getCurrentState()` reads the live state from `localStorage`
+  or in-page state.
+- **`data-followup`**: `Update the source of truth — write code, open a
+  PR, or run the migration.`
+- **Primary highlight**: `class="primary"` — it's the artefact's one
+  important action.
+
+The existing "Export JSON" button stays; the relay button is *added*,
+not a replacement. This is the one archetype where the artefact's
+*state itself* becomes the prompt payload — not a one-line summary.
+
 ## Anti-patterns
 
 - No React / Vue / Svelte. Vanilla JS — `<script type="module">` is fine.
-- No backend calls. Everything happens in the page; `localStorage` is
-  the store; "save" means export.
+- No backend calls except the clipboard write described above. Everything
+  else happens in the page; `localStorage` is the store; "save" means
+  export.
 - Do not over-feature. If the user asked for a flag editor with 3
   flags, ship 3 flags and the minimum to manage them.
 - Do not lock data inside the UI. Always provide a JSON export.
