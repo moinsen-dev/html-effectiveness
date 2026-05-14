@@ -40,7 +40,7 @@ The 20 examples cluster into 9 archetypes:
 
 ```bash
 # inside Claude Code
-/plugin marketplace add github:thariqs/html-effectiveness
+/plugin marketplace add moinsen-dev/html-effectiveness
 /plugin install html-output@html-effectiveness
 ```
 
@@ -56,18 +56,37 @@ Then ask Claude any of these — note that you do *not* type "as HTML":
 Each lands as `./artifacts/<slug>-<timestamp>.html` and pops open in your
 browser.
 
-For the full plugin readme — skill list, anti-patterns, customisation —
-see [`html-output/README.md`](./html-output/README.md).
+### How the routing works
+
+A `UserPromptSubmit` hook (`html-output/hooks/route-to-html.py`) sits in front
+of every prompt:
+
+- Regex-classifies your prompt against ~85 trigger phrases drawn from the 9
+  `html-*` skill descriptions.
+- On match: injects a system reminder telling the agent **which** skill to
+  use and the write-and-open recipe. Pure regex, no model call, no network,
+  fails open.
+- Bypassed automatically for prompts starting with `!` or `/`, or containing
+  the literal token `[no-html]` if you want a one-off plain answer.
+
+That's why the plugin works without you typing "as HTML" — the hook is the
+router, the skills are the templates.
+
+For the full plugin readme — skill list, anti-patterns, customisation — see
+[`html-output/README.md`](./html-output/README.md).
 
 ## Repo layout
 
 ```
 .
 ├── .claude-plugin/marketplace.json   ← Claude Code marketplace manifest
-├── html-output/                      ← the plugin (skills + command + examples)
+├── html-output/                      ← the plugin (skills + command + hook + examples)
 │   ├── .claude-plugin/plugin.json
 │   ├── README.md                     ← plugin documentation
 │   ├── commands/html.md              ← /html slash command
+│   ├── hooks/
+│   │   ├── hooks.json                ← UserPromptSubmit registration
+│   │   └── route-to-html.py          ← regex router → skill picker
 │   ├── examples/01-…html  …  20-…html
 │   └── skills/
 │       ├── _shared/{output-conventions,style-tokens}.md

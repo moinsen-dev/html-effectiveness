@@ -1,6 +1,6 @@
 {
   "name": "html-output",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Route Claude Code answers into self-contained HTML artifacts (status reports, PR writeups, design systems, slide decks, flowcharts, research explainers, animation prototypes, custom editor UIs, exploration boards) instead of markdown walls. Writes to ./artifacts/<slug>-<ts>.html and opens in the browser.",
   "author": {
     "name": "thariqs",

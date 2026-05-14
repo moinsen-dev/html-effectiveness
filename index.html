@@ -321,8 +321,174 @@
 
   /* ── footer ───────────────────────────── */
 
+  /* ── eyebrow chip (github / plugin) ────── */
+
+  .eyebrow-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .eyebrow-row .eyebrow { margin-bottom: 0; }
+  .repo-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--g700);
+    text-decoration: none;
+    padding: 6px 12px 6px 10px;
+    background: var(--paper);
+    border: 1.5px solid var(--g300);
+    border-radius: 999px;
+    transition: border-color 120ms, color 120ms;
+  }
+  .repo-chip:hover { border-color: var(--slate); color: var(--slate); }
+  .repo-chip svg { width: 14px; height: 14px; }
+  .repo-chip .star { color: var(--clay); }
+
+  /* ── install / plugin panel ────────────── */
+
+  section.install {
+    margin-top: 96px;
+    background: var(--g100);
+    border-radius: 18px;
+    padding: 48px 44px 44px;
+    position: relative;
+    border: 1.5px solid var(--g200);
+  }
+  @media (max-width: 640px) { section.install { padding: 36px 24px 32px; } }
+  section.install .stamp {
+    position: absolute;
+    top: -14px; left: 32px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--clay);
+    background: var(--ivory);
+    padding: 4px 12px;
+    border: 1.5px solid var(--clay);
+    border-radius: 999px;
+  }
+  .install-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 44px;
+    align-items: start;
+  }
+  @media (max-width: 880px) { .install-grid { grid-template-columns: 1fr; gap: 32px; } }
+  .install h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(26px, 3vw, 34px);
+    line-height: 1.15;
+    margin: 0 0 14px;
+    letter-spacing: -0.012em;
+    max-width: 18ch;
+  }
+  .install h2 em { font-style: italic; color: var(--clay); }
+  .install p.lede {
+    font-size: 15px;
+    color: var(--g700);
+    margin: 0 0 22px;
+    max-width: 44ch;
+  }
+  .install p.lede code {
+    font-family: var(--mono);
+    font-size: 13px;
+    background: var(--paper);
+    padding: 1px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--g200);
+  }
+  .install .meta {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--g500);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .install .meta span { display: inline-flex; align-items: center; gap: 6px; }
+  .install .meta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--olive); }
+  .install .meta a { color: var(--clay); text-decoration: none; }
+  .install .meta a:hover { text-decoration: underline; text-decoration-color: var(--oat); text-underline-offset: 3px; }
+
+  pre.shell {
+    margin: 0 0 22px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.6;
+    background: var(--slate);
+    color: #F0EEE6;
+    padding: 18px 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+    border: 1.5px solid var(--slate);
+    box-shadow: 0 10px 28px rgba(20,20,19,.18);
+  }
+  pre.shell .c { color: #87867F; }
+  pre.shell .p { color: var(--clay); }
+
+  .prompts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .prompts li {
+    background: var(--paper);
+    border: 1.5px solid var(--g200);
+    border-left: 3px solid var(--clay);
+    border-radius: 6px;
+    padding: 12px 14px 12px 16px;
+    font-size: 14px;
+    color: var(--g700);
+    font-style: italic;
+    font-family: var(--serif);
+    line-height: 1.42;
+  }
+  .prompts li::before {
+    content: "ask ";
+    font-family: var(--mono);
+    font-size: 10px;
+    font-style: normal;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-right: 8px;
+    font-weight: 600;
+  }
+  .prompts-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--g500);
+    margin: 0 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .prompts-label::after {
+    content: "";
+    flex: 1;
+    height: 1.5px;
+    background: var(--g300);
+  }
+
+  /* ── footer ───────────────────────────── */
+
   footer {
-    margin-top: 100px;
+    margin-top: 80px;
     border-top: 1.5px solid var(--g300);
     padding-top: 36px;
     display: flex;
@@ -333,8 +499,9 @@
     font-size: 13px;
     color: var(--g500);
   }
-  footer .k { font-family: var(--serif); font-style: italic; color: var(--g700); font-size: 15px; }
+  footer .k { font-family: var(--serif); font-style: italic; color: var(--g700); font-size: 15px; max-width: 44ch; }
   footer a { color: var(--clay); text-decoration-color: var(--oat); text-underline-offset: 3px; }
+  footer .links { display: flex; gap: 18px; }
 </style>
 </head>
 <body>
@@ -343,12 +510,20 @@
   <header class="masthead">
     <div class="hero-grid">
       <div>
-        <div class="eyebrow">Companion to the blog post</div>
+        <div class="eyebrow-row">
+          <div class="eyebrow">Companion to the blog post</div>
+          <a class="repo-chip" href="https://github.com/moinsen-dev/html-effectiveness" aria-label="GitHub repo">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            <span>moinsen-dev/html-effectiveness</span>
+            <span class="star">★</span>
+          </a>
+        </div>
         <h1>The unreasonable <em>effectiveness</em> of HTML</h1>
         <p class="intro">
           Twenty self-contained <code>.html</code> files an agent produced instead of a wall of markdown.
           Each one trades a document you'd skim for one you'd actually read — open any of them directly in
-          a browser. Grouped by the kind of work they replace.
+          a browser. Grouped by the kind of work they replace. <a href="#install">Plugin below</a> turns
+          this into your Claude Code's default for the same kinds of asks.
         </p>
         <nav class="toc">
           <a href="#exploration">Exploration &amp; Planning <span class="n">3</span></a>
@@ -812,9 +987,47 @@
     </div>
   </section>
 
+  <!-- ============================== Install the plugin ============================== -->
+  <section id="install" class="install">
+    <span class="stamp">The consequence</span>
+    <div class="install-grid">
+      <div>
+        <h2>Want your Claude Code to <em>do this by default</em>?</h2>
+        <p class="lede">
+          Install the <code>html-output</code> plugin. From then on, Claude answers the kinds of asks
+          below with a real <code>.html</code> file — saved to <code>./artifacts/</code> and opened in
+          your browser — instead of a markdown wall. No <em>"as HTML"</em> needed in the prompt; a
+          hook routes intent to the right skill automatically.
+        </p>
+        <pre class="shell"><span class="c"># inside Claude Code</span>
+<span class="p">/plugin</span> marketplace add moinsen-dev/html-effectiveness
+<span class="p">/plugin</span> install html-output@html-effectiveness</pre>
+        <div class="meta">
+          <span><span class="dot"></span>9 skills · 1 slash command · 1 hook</span>
+          <span><a href="./html-output/README.md">Plugin README →</a></span>
+        </div>
+      </div>
+      <div>
+        <p class="prompts-label">Then just ask</p>
+        <ul class="prompts">
+          <li>Write me a weekly status report for the Acme engineering team.</li>
+          <li>Explain how HTTP/2 server push works.</li>
+          <li>Three approaches for rate-limiting our public API, with tradeoffs.</li>
+          <li>Design system for a fintech app — colours, type, primitives.</li>
+          <li>Slide deck: why HTML beats markdown for LLM output.</li>
+          <li>Internal tool: feature-flag editor for these three flags…</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <footer>
-    <span class="k">Everything on this page is itself a single <code>.html</code> file.</span>
-    <span>View the repo · <a href="https://thariqs.github.io/html-effectiveness/">thariqs.github.io/html-effectiveness</a></span>
+    <span class="k">Everything on this page is itself a single <code>.html</code> file — including this one.</span>
+    <span class="links">
+      <a href="https://github.com/moinsen-dev/html-effectiveness">GitHub</a>
+      <a href="./html-output/README.md">Plugin</a>
+      <a href="https://thariqs.github.io/html-effectiveness/">Original demos</a>
+    </span>
   </footer>
 
 </div>
