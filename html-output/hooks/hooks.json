@@ -1,0 +1,16 @@
+{
+  "description": "html-output router. On every user prompt, regex-classifies the request and, when it matches one of the 9 html-* archetypes, injects a system reminder telling the agent to produce an HTML artifact instead of a markdown answer. Pure heuristic, no external API calls, no model calls.",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/hooks/route-to-html.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

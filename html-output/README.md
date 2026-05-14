@@ -29,6 +29,15 @@ Plus one slash command:
 
 - `/html <freeform>` — force HTML output even when no auto-trigger fired.
 
+Plus a `UserPromptSubmit` hook (`hooks/route-to-html.py`):
+
+- Regex-classifies every user prompt against ~85 trigger phrases drawn from
+  the 9 SKILL.md descriptions.
+- On match: injects a system reminder telling the agent which skill to use
+  and the write+open recipe.
+- Bypassed for prompts starting with `!` or `/`, or containing `[no-html]`.
+- Pure regex, no model call, no network. Fails open.
+
 ## Install
 
 ```bash
