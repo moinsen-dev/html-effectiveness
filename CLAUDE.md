@@ -107,3 +107,13 @@ Captured from the session that produced this doc:
 - The directional north star + working agreements only.
 - Public surfaces (`README.md`, `index.html`) keep describing step 1 until step 2 has
   a prototype worth pointing at.
+
+## 7. Next Steos / Todos
+
+Offen für später:
+  - Examples 02-20 retrofitten (die SKILL-Recipes sind verbindlich, aber nur Example 01 demonstriert das
+  Pattern visuell)
+  - README + index.html neu textieren — das Plugin ist jetzt ehrlich step-2-tauglich, der öffentliche Pitch
+   hinkt nach
+  - Optionales /schedule: Beobachten ob die anderen html-Skills bei nächster Echtnutzung den
+  Clipboard-Pattern korrekt auswerfen — falls nicht, Schwächen im Recipe-Wording fixen
