@@ -1,0 +1,20 @@
+{
+  "name": "html-effectiveness",
+  "owner": {
+    "name": "thariqs",
+    "url": "https://thariqs.github.io/html-effectiveness/"
+  },
+  "metadata": {
+    "description": "Make Claude Code answer with rich, opinionated HTML artifacts instead of walls of markdown. Companion marketplace to the 'unreasonable effectiveness of HTML' demos.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "html-output",
+      "source": "./html-output",
+      "description": "Nine skills + one /html command that route Claude's output for status reports, PR writeups, design systems, slide decks, flowcharts, research explainers, prototypes, and custom editor UIs into self-contained .html files in ./artifacts/ — then opens them in the browser. Style templates are the 20 demo HTMLs at the root of this repo.",
+      "version": "0.1.0",
+      "category": "productivity"
+    }
+  ]
+}

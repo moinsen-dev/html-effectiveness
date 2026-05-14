@@ -1,0 +1,23 @@
+{
+  "name": "html-output",
+  "version": "0.1.0",
+  "description": "Route Claude Code answers into self-contained HTML artifacts (status reports, PR writeups, design systems, slide decks, flowcharts, research explainers, animation prototypes, custom editor UIs, exploration boards) instead of markdown walls. Writes to ./artifacts/<slug>-<ts>.html and opens in the browser.",
+  "author": {
+    "name": "thariqs",
+    "url": "https://thariqs.github.io/html-effectiveness/"
+  },
+  "skills": [
+    "./skills/html-exploration",
+    "./skills/html-code-review",
+    "./skills/html-design",
+    "./skills/html-prototype",
+    "./skills/html-illustration",
+    "./skills/html-deck",
+    "./skills/html-research",
+    "./skills/html-report",
+    "./skills/html-editor"
+  ],
+  "commands": [
+    "./commands/html.md"
+  ]
+}
